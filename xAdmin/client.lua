@@ -90,23 +90,23 @@ AddEventHandler('xtag:untag', function(serverId)
 	peds[ntag] = nil
 end)
 Citizen.CreateThread(function()
-    while true do
+	while true do
 		peds = {}
 		Citizen.Wait(600000)
-    end
+	end
 end)
 -- mute Thread
 local mute = false
 Citizen.CreateThread(function()
-    while true do
-        if mute then
-			DisableControlAction(0, 245, true)
-			DisableControlAction(0, 249, true)
-			Citizen.Wait(0)
-		else
-			Citizen.Wait(1000)
-        end
-    end
+	while true do
+		if mute then
+				DisableControlAction(0, 245, true)
+				DisableControlAction(0, 249, true)
+				Citizen.Wait(0)
+			else
+				Citizen.Wait(1000)
+		end
+	end
 end)
 -- mute
 RegisterNetEvent('xadmin:mute')
@@ -196,33 +196,33 @@ AddEventHandler('xadmin:players', function()
 	players = not players
 end)
 Citizen.CreateThread(function()
-    while true do
-        if players then
-			for _, i in ipairs(GetActivePlayers()) do
-				if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= PlayerPedId() then
-					aped = GetPlayerPed(i)
-					PPlayer = Citizen.InvokeNative(0xBFEFE3321A3F5015, aped, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
-					Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 0, true)
-					if NetworkIsPlayerTalking(i) then
-						Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, true)
-					else
+	while true do
+		if players then
+				for _, i in ipairs(GetActivePlayers()) do
+					if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= PlayerPedId() then
+						aped = GetPlayerPed(i)
+						PPlayer = Citizen.InvokeNative(0xBFEFE3321A3F5015, aped, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
+						Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 0, true)
+						if NetworkIsPlayerTalking(i) then
+							Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, true)
+						else
+							Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, false)
+						end
+					end
+				end
+				Citizen.Wait(100)
+			else
+				for _, i in ipairs(GetActivePlayers()) do
+					if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= PlayerPedId() then
+						aped = GetPlayerPed(i)
+						PPlayer = Citizen.InvokeNative(0xBFEFE3321A3F5015, aped, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
+						Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 0, false)
 						Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, false)
 					end
 				end
-			end
-			Citizen.Wait(100)
-		else
-			for _, i in ipairs(GetActivePlayers()) do
-				if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= PlayerPedId() then
-					aped = GetPlayerPed(i)
-					PPlayer = Citizen.InvokeNative(0xBFEFE3321A3F5015, aped, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
-					Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 0, false)
-					Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, false)
-				end
-			end
-			Citizen.Wait(1000)
-        end
-    end
+				Citizen.Wait(1000)
+		end
+	end
 end)
 -- giveweapon
 RegisterNetEvent('xadmin:giveweapon')
@@ -353,27 +353,27 @@ AddEventHandler('xadmin:noclip', function()
 	FreezeEntityPosition(PlayerPedId(), noclip)
 end)
 Citizen.CreateThread(function()
-    while true do
-        if noclip then
-            local yoff = 0.0
-            local zoff = 0.0
+	while true do
+		if noclip then
+			local yoff = 0.0
+			local zoff = 0.0
 			if IsDisabledControlPressed(0, 32) then
-                yoff = 0.5
+				yoff = 0.5
 			end
-            if IsDisabledControlPressed(0, 33) then
-                yoff = -0.5
+			if IsDisabledControlPressed(0, 33) then
+				yoff = -0.5
 			end
-            if IsDisabledControlPressed(0, 34) then
-                SetEntityHeading(PlayerPedId(), GetEntityHeading(PlayerPedId())+3)
+			if IsDisabledControlPressed(0, 34) then
+				SetEntityHeading(PlayerPedId(), GetEntityHeading(PlayerPedId())+3)
 			end
-            if IsDisabledControlPressed(0, 35) then
-                SetEntityHeading(PlayerPedId(), GetEntityHeading(PlayerPedId())-3)
+			if IsDisabledControlPressed(0, 35) then
+				SetEntityHeading(PlayerPedId(), GetEntityHeading(PlayerPedId())-3)
 			end
-            if IsDisabledControlPressed(0, 85) then
-                zoff = 0.2
+			if IsDisabledControlPressed(0, 85) then
+				zoff = 0.2
 			end
-            if IsDisabledControlPressed(0, 48) then
-                zoff = -0.2
+			if IsDisabledControlPressed(0, 48) then
+				zoff = -0.2
 			end
 			local newPos = nil
 			if IsDisabledControlPressed(0, 21) then
@@ -381,16 +381,16 @@ Citizen.CreateThread(function()
 			else
 				newPos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, yoff * (2 + 0.3), zoff * (2 + 0.3))
 			end
-            local heading = GetEntityHeading(PlayerPedId())
-            SetEntityVelocity(PlayerPedId(), 0.0, 0.0, 0.0)
-            SetEntityRotation(PlayerPedId(), 0.0, 0.0, 0.0, 0, false)
-            SetEntityHeading(PlayerPedId(), heading)
-            SetEntityCoordsNoOffset(PlayerPedId(), newPos.x, newPos.y, newPos.z, noclip, noclip, noclip)
+			local heading = GetEntityHeading(PlayerPedId())
+			SetEntityVelocity(PlayerPedId(), 0.0, 0.0, 0.0)
+			SetEntityRotation(PlayerPedId(), 0.0, 0.0, 0.0, 0, false)
+			SetEntityHeading(PlayerPedId(), heading)
+			SetEntityCoordsNoOffset(PlayerPedId(), newPos.x, newPos.y, newPos.z, noclip, noclip, noclip)
 			Citizen.Wait(0)
 		else
 			Citizen.Wait(1000)
-        end
-    end
+		end
+	end
 end)
 -- clearchat
 RegisterNetEvent('xadmin:clearchat')
