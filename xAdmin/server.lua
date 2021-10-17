@@ -6,7 +6,7 @@ local xbanreason = 'You Are Banned. Name: '
 -- ban
 local bans = json.decode(LoadResourceFile(GetCurrentResourceName(), 'bans.json'))
 local function OnPlayerConnecting(name, setKickReason, deferrals)
-	local reason = nil
+	local reason = ''
 	local banned = false
 	local identifiers = GetPlayerIdentifiers(source)
 		for _, v in pairs(identifiers) do
