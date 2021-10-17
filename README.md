@@ -2,6 +2,11 @@
 FiveM admin system based by Commands (Admin Tag and Rank, Report and Report Replay, ...)
 - You can use this resource for all platforms (ESX, VRP, QBCore, ...)
 - You can use this resource in All versions FiveM and All OneSyncs
+>**To solve the problem of the same commands** : 
+>```
+>local xcustomcmd = '!'
+>```
+>You can edit server.lua and client.lua (line 2) for build custom commands And commands converted to /!command
 # Install
 1. Download xAdmin and copy/paste in your resources folder
 2. Edit server.cfg and add below text/code and save it
