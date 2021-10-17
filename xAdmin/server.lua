@@ -7,22 +7,22 @@ local xbanreason = 'You Are Banned. Name: '
 local bans = json.decode(LoadResourceFile(GetCurrentResourceName(), 'bans.json'))
 local function OnPlayerConnecting(name, setKickReason, deferrals)
 	local reason = nil
-    local banned = false
-    local identifiers = GetPlayerIdentifiers(source)
-    for _, v in pairs(identifiers) do
-        if string.find(v, xbantype..':') then
-            if bans[v] then
-				reason = bans[v]
-				banned = true
-				break
+	local banned = false
+	local identifiers = GetPlayerIdentifiers(source)
+		for _, v in pairs(identifiers) do
+			if string.find(v, xbantype..':') then
+				if bans[v] then
+					reason = bans[v]
+					banned = true
+					break
+				end
 			end
-        end
-    end
+		end
 	local reason = xbanreason..reason
-    if banned then
-        CancelEvent()
-        setKickReason(reason)
-    end
+	if banned then
+		CancelEvent()
+		setKickReason(reason)
+	end
 end
 AddEventHandler('playerConnecting', OnPlayerConnecting)
 RegisterCommand(xcustomcmd..'ban',function(source, args, rawCommand)
