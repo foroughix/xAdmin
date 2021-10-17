@@ -466,14 +466,14 @@ local function EnumerateEntities(initFunc, moveFunc, disposeFunc)
 	end)
 end
 function EnumerateVehicles()
-    return EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle)
+	return EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle)
 end
 function EnumerateObjects()
-  return EnumerateEntities(FindFirstObject, FindNextObject, EndFindObject)
+	return EnumerateEntities(FindFirstObject, FindNextObject, EndFindObject)
 end
 function EnumeratePickups()
-  return EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup)
+	return EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup)
 end
 function EnumeratePeds()
-  return EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed)
+	return EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed)
 end
