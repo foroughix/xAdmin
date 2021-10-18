@@ -180,7 +180,14 @@ RegisterCommand(xcustomcmd..'check',function(source, args, rawCommand)
 		if GetPlayerName(args[1]) then
 			local playerId = args[1]
 			local playerName = GetPlayerName(args[1])
-			local check = 'Health:'..GetEntityHealth(GetPlayerPed(playerId))..'/'..GetEntityMaxHealth(GetPlayerPed(playerId))..'\nArmour:'..GetPedArmour(GetPlayerPed(playerId))..'/'..GetPlayerMaxArmour(playerId)
+			local ide = nil
+			for k, v in ipairs(GetPlayerIdentifiers(playerId)) do
+				if string.match(v, xbantype..':') then
+					ide = v
+					break
+				end
+			end
+			local check = 'Health:'..GetEntityHealth(GetPlayerPed(playerId))..'/'..GetEntityMaxHealth(GetPlayerPed(playerId))..'\nArmour:'..GetPedArmour(GetPlayerPed(playerId))..'/'..GetPlayerMaxArmour(playerId)..'\n'..ide
 			local admin = GetPlayerName(source)
 			if xwebhook ~= 'none' then
 				PerformHttpRequest(xwebhook, function(err, text, headers) end, 'POST', json.encode({content = '**Check**```Admin:'..admin..'\nPlayer:'..playerName..'\n'..check..'```'}), { ['Content-Type'] = 'application/json' })
