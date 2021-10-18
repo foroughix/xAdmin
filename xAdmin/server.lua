@@ -208,7 +208,7 @@ RegisterCommand(xcustomcmd..'tpw',function(source, args)
 end)
 -- spectate
 RegisterCommand(xcustomcmd..'spectate',function(source, args)
-	if IsPlayerAceAllowed(source,'xadmin.all') or IsPlayerAceAllowed(source,'xadmin.spectate') and args[1] and args[1] ~= source then
+	if IsPlayerAceAllowed(source,'xadmin.all') or IsPlayerAceAllowed(source,'xadmin.spectate') and args[1] then
 		if GetPlayerName(args[1]) then
 			local playerId = args[1]
 			local playerName = GetPlayerName(args[1])
