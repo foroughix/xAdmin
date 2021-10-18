@@ -9,17 +9,17 @@ local function OnPlayerConnecting(name, setKickReason, deferrals)
 	local reason = ''
 	local banned = false
 	local identifiers = GetPlayerIdentifiers(source)
-		for _, v in pairs(identifiers) do
-			if string.find(v, xbantype..':') then
-				if bans[v] then
-					reason = bans[v]
-					banned = true
-					break
-				end
+	for _, v in pairs(identifiers) do
+		if string.find(v, xbantype..':') then
+			if bans[v] then
+				reason = bans[v]
+				banned = true
+				break
 			end
 		end
-	local reason = xbanreason..reason
+	end
 	if banned then
+		reason = xbanreason..reason
 		CancelEvent()
 		setKickReason(reason)
 	end
