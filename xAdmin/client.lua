@@ -49,20 +49,20 @@ end
 -- tag
 local peds = {}
 local function DrawText3D(coords, tag)
-    local camCoords = GetGameplayCamCoord()
-    local dist = #(coords - camCoords)   
-    local scale = 200 / (GetGameplayCamFov() * dist)
-    SetTextColour(0, 0, 0, 255)
+	local camCoords = GetGameplayCamCoord()
+	local dist = #(coords - camCoords)   
+	local scale = 200 / (GetGameplayCamFov() * dist)
+	SetTextColour(0, 0, 0, 255)
 	SetTextScale(0.0, 0.7 * scale)
 	SetTextFont(0)
-    SetTextDropshadow(0, 0, 0, 0, 55)
+	SetTextDropshadow(0, 0, 0, 0, 55)
 	SetTextDropShadow()
-    SetTextCentre(true)
-    BeginTextCommandDisplayText('STRING')
-    AddTextComponentSubstringPlayerName(tag)
-    SetDrawOrigin(coords, 0)
-    EndTextCommandDisplayText(0.0, 0.0)
-    ClearDrawOrigin()
+	SetTextCentre(true)
+	BeginTextCommandDisplayText('STRING')
+	AddTextComponentSubstringPlayerName(tag)
+	SetDrawOrigin(coords, 0)
+	EndTextCommandDisplayText(0.0, 0.0)
+	ClearDrawOrigin()
 end
 local function Display(ped, tag, ntag)	
 	local playerPed = PlayerPedId()
@@ -75,14 +75,14 @@ end
 RegisterNetEvent('xtag:tag')
 AddEventHandler('xtag:tag', function(tag, serverId)
 	local ntag = tonumber(serverId)
-    local player = GetPlayerFromServerId(serverId)
-    if player ~= -1 then
-        local ped = GetPlayerPed(player)
+	local player = GetPlayerFromServerId(serverId)
+	if player ~= -1 then
+		local ped = GetPlayerPed(player)
 		if not peds[ntag] then
 			peds[ntag] = true
 			Display(ped, tag, ntag)
 		end
-    end
+	end
 end)
 RegisterNetEvent('xtag:untag')
 AddEventHandler('xtag:untag', function(serverId)
@@ -100,11 +100,11 @@ local mute = false
 Citizen.CreateThread(function()
 	while true do
 		if mute then
-				DisableControlAction(0, 245, true)
-				DisableControlAction(0, 249, true)
-				Citizen.Wait(0)
-			else
-				Citizen.Wait(1000)
+			DisableControlAction(0, 245, true)
+			DisableControlAction(0, 249, true)
+			Citizen.Wait(0)
+		else
+			Citizen.Wait(1000)
 		end
 	end
 end)
@@ -198,29 +198,29 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		if players then
-				for _, i in ipairs(GetActivePlayers()) do
-					if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= PlayerPedId() then
-						aped = GetPlayerPed(i)
-						PPlayer = Citizen.InvokeNative(0xBFEFE3321A3F5015, aped, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
-						Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 0, true)
-						if NetworkIsPlayerTalking(i) then
-							Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, true)
-						else
-							Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, false)
-						end
-					end
-				end
-				Citizen.Wait(100)
-			else
-				for _, i in ipairs(GetActivePlayers()) do
-					if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= PlayerPedId() then
-						aped = GetPlayerPed(i)
-						PPlayer = Citizen.InvokeNative(0xBFEFE3321A3F5015, aped, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
-						Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 0, false)
+			for _, i in ipairs(GetActivePlayers()) do
+				if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= PlayerPedId() then
+					aped = GetPlayerPed(i)
+					PPlayer = Citizen.InvokeNative(0xBFEFE3321A3F5015, aped, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
+					Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 0, true)
+					if NetworkIsPlayerTalking(i) then
+						Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, true)
+					else
 						Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, false)
 					end
 				end
-				Citizen.Wait(1000)
+			end
+			Citizen.Wait(100)
+		else
+			for _, i in ipairs(GetActivePlayers()) do
+				if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= PlayerPedId() then
+					aped = GetPlayerPed(i)
+					PPlayer = Citizen.InvokeNative(0xBFEFE3321A3F5015, aped, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
+					Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 0, false)
+					Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, false)
+				end
+			end
+			Citizen.Wait(1000)
 		end
 	end
 end)
@@ -338,6 +338,7 @@ local godmode = false
 RegisterNetEvent('xadmin:godmode')
 AddEventHandler('xadmin:godmode', function()
 	NetworkSetFriendlyFireOption(godmode)
+	SetEntityInvincible(PlayerPedId(), not godmode)
 	godmode = not godmode
 end)
 -- announce
