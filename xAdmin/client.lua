@@ -152,7 +152,7 @@ AddEventHandler('xadmin:spectate', function(coords, playerId)
 		cdspectate = true
 		if spectate then
 			spectate = false
-			Wait(100)
+			Wait(300)
 			RequestCollisionAtCoord(positionped)
 			NetworkSetInSpectatorMode(false, spectateped)
 			FreezeEntityPosition(PlayerPedId(), false)
@@ -168,7 +168,7 @@ AddEventHandler('xadmin:spectate', function(coords, playerId)
 			SetEntityVisible(PlayerPedId(), false)
 			SetEntityCoords(PlayerPedId(), coords.x, coords.y, coords.z + 10.0)
 			FreezeEntityPosition(PlayerPedId(), true)
-			Wait(1000)
+			Wait(1500)
 			SetEntityCoords(PlayerPedId(), coords.x, coords.y, coords.z - 10.0)
 			for _, i in ipairs(GetActivePlayers()) do
 				if NetworkIsPlayerActive(i) and tonumber(GetPlayerServerId(i)) == tonumber(playerId) then
