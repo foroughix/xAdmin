@@ -217,7 +217,9 @@ RegisterCommand(xcustomcmd..'spectate',function(source, args)
 				PerformHttpRequest(xwebhook, function(err, text, headers) end, 'POST', json.encode({content = '**Spectate**```Admin:'..admin..'\nPlayer:'..playerName..'```'}), { ['Content-Type'] = 'application/json' })
 			end
 			local coords = GetEntityCoords(GetPlayerPed(playerId))
-			TriggerClientEvent('xadmin:spectate', source, coords, playerId)
+			if coords.x ~= 0 and coords.y ~= 0 and coords.z ~= 0 then
+				TriggerClientEvent('xadmin:spectate', source, coords, playerId)
+			end
 		end
 	end
 end)
