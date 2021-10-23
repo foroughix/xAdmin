@@ -54,7 +54,6 @@ RegisterCommand(xcustomcmd..'unban',function(source, args, rawCommand)
 	if IsPlayerAceAllowed(source,'xadmin.all') or IsPlayerAceAllowed(source,'xadmin.unban') and args[1] then
 		local ide = args[1]
 		if bans[ide] then
-			local reason = string.gsub(rawCommand, xcustomcmd..'ban '..args[1]..' ', '')
 			local admin = GetPlayerName(source)
 			if xwebhook ~= 'none' then
 				PerformHttpRequest(xwebhook, function(err, text, headers) end, 'POST', json.encode({content = '**Unban**```Admin:'..admin..'\n'..ide..'```'}), { ['Content-Type'] = 'application/json' })
