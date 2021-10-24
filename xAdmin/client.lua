@@ -242,6 +242,7 @@ end)
 RegisterNetEvent('xadmin:warn')
 AddEventHandler('xadmin:warn', function(reason)
 	ShowNotification('Warn !!!\n'..reason)
+	AnimpostfxPlay('ExplosionJosh3', 3000, false)
 end)
 -- givehealth
 RegisterNetEvent('xadmin:givehealth')
