@@ -33,6 +33,7 @@ TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'fixveh', 'fix vehicle playe
 TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'setped', 'change ped player', {{ name='player', help='player id' },{ name='name', help='ped name' }})
 TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'freeze', 'freeze player', {{ name='player', help='player id' }})
 TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'unfreeze', 'unfreeze player', {{ name='player', help='player id' }})
+TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'screenshot', 'screenshot player', {{ name='player', help='player id' }})
 TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'revive', 'revive player', {{ name='player', help='player id' }})
 TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'slay', 'slay player', {{ name='player', help='player id' }})
 TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'announce', 'send announce for all players', {{ name='announce', help='announce text' }})
