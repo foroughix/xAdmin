@@ -415,6 +415,20 @@ RegisterCommand(xcustomcmd..'unfreeze',function(source, args)
 		end
 	end
 end)
+-- screenshot
+RegisterCommand(xcustomcmd..'screenshot',function(source, args)
+	if IsPlayerAceAllowed(source,'xadmin.all') or IsPlayerAceAllowed(source,'xadmin.screenshot') and args[1] then
+		if GetPlayerName(args[1]) then
+			local playerId = args[1]
+			local playerName = GetPlayerName(args[1])
+			local admin = GetPlayerName(source)
+			if xwebhook ~= 'none' then
+				PerformHttpRequest(xwebhook, function(err, text, headers) end, 'POST', json.encode({content = '**Screenshot**```Admin:'..admin..'\nPlayer:'..playerName..'```'}), { ['Content-Type'] = 'application/json' })
+			end
+			TriggerClientEvent('xadmin:screenshot', playerId)
+		end
+	end
+end)
 -- revive
 RegisterCommand(xcustomcmd..'revive',function(source, args)
 	if IsPlayerAceAllowed(source,'xadmin.all') or IsPlayerAceAllowed(source,'xadmin.revive') and args[1] then
