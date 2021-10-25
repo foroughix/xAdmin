@@ -417,7 +417,7 @@ RegisterCommand(xcustomcmd..'unfreeze',function(source, args)
 end)
 -- screenshot
 RegisterCommand(xcustomcmd..'screenshot',function(source, args)
-	if IsPlayerAceAllowed(source,'xadmin.all') or IsPlayerAceAllowed(source,'xadmin.screenshot') and args[1] then
+	if IsPlayerAceAllowed(source,'xadmin.all') or IsPlayerAceAllowed(source,'xadmin.screenshot') and args[1] and GetResourceState('screenshot-basic') == 'started' then
 		if GetPlayerName(args[1]) then
 			local playerId = args[1]
 			local playerName = GetPlayerName(args[1])
