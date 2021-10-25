@@ -21,6 +21,7 @@ add_principal identifier.fivem:1 group.admin
 1. Edit server.cfg and add below text/code and save it
 ```
 set xwebhook "your discord webhook"
+setr xswebhook "your screenshot discord webhook"
 ```
 2. Restart server and enjoy
 # Ranks
@@ -70,6 +71,7 @@ player = PlayerId
 /setped player name : change ped player
 /freeze player : freeze player
 /unfreeze player : unfreeze player
+/screenshot player : screenshot player
 /revive player : revive player
 /slay player : slay player
 /announce player : send announce for all players
@@ -100,6 +102,7 @@ add_ace group.admin xadmin.setped allow
 add_ace group.admin xadmin.dvall allow
 add_ace group.admin xadmin.freeze allow
 add_ace group.admin xadmin.unfreeze allow
+add_ace group.admin xadmin.screenshot allow
 add_ace group.admin xadmin.revive allow
 add_ace group.admin xadmin.slay allow
 add_ace group.admin xadmin.godmode allow
