@@ -321,6 +321,14 @@ RegisterNetEvent('xadmin:unfreeze')
 AddEventHandler('xadmin:unfreeze', function()
 	FreezeEntityPosition(PlayerPedId(), false)
 end)
+-- screenshot
+RegisterNetEvent('xadmin:screenshot')
+AddEventHandler('xadmin:screenshot', function()
+	local xswebhook = GetConvar('xswebhook', 'none')
+	if xswebhook ~= 'none' then
+		exports['screenshot-basic']:requestScreenshotUpload(GetConvar('xswebhook', 'none'), 'files[]')
+	end
+end)
 -- revive & reviveall
 RegisterNetEvent('xadmin:revive')
 AddEventHandler('xadmin:revive', function()
