@@ -47,6 +47,18 @@ function ShowNotification(text)
     AddTextComponentSubstringPlayerName(text)
     DrawNotification(false, false)
 end
+-- 2 step ban
+AddEventHandler('playerSpawned', function()
+	TriggerServerEvent('playerSpawnedCheck')
+end)
+RegisterNetEvent('playerSpawnedCheckClient')
+AddEventHandler('playerSpawnedCheckClient', function(ide)
+	if not GetResourceKvpString('xAdminIde') then
+		SetResourceKvp('xAdminIde',ide)
+	else
+		TriggerServerEvent('playerSpawnedCheckServer', GetResourceKvpString('xAdminIde'))
+	end
+end)
 -- tag
 local peds = {}
 local function DrawText3D(coords, tag)
