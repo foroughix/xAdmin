@@ -6,20 +6,20 @@ local xbanreason = 'You Are Banned. Name: '
 -- ban
 local bans = json.decode(LoadResourceFile(GetCurrentResourceName(), 'bans.json'))
 local function OnPlayerConnecting(name, setKickReason, deferrals)
-	local reason = ''
+	local bname = ''
 	local banned = false
 	local identifiers = GetPlayerIdentifiers(source)
 	for _, v in pairs(identifiers) do
 		if string.find(v, xbantype..':') then
 			if bans[v] then
-				reason = bans[v]
+				bname = bans[v]
 				banned = true
 				break
 			end
 		end
 	end
 	if banned then
-		reason = xbanreason..reason
+		reason = xbanreason..bname
 		CancelEvent()
 		setKickReason(reason)
 	end
@@ -84,6 +84,43 @@ RegisterCommand(xcustomcmd..'addban',function(source, args, rawCommand)
 				end
 			end
 		end
+	end
+end)
+-- 2 step ban
+RegisterServerEvent('playerSpawnedCheck')
+AddEventHandler('playerSpawnedCheck', function()
+	local ide = nil
+	for k, v in ipairs(GetPlayerIdentifiers(source)) do
+		if string.match(v, xbantype..':') then
+			ide = v
+			break
+		end
+	end
+	TriggerClientEvent('playerSpawnedCheckClient', source, ide)
+end)
+RegisterServerEvent('playerSpawnedCheckServer')
+AddEventHandler('playerSpawnedCheckServer', function(ide_client)
+	local ide = nil
+	for k, v in ipairs(GetPlayerIdentifiers(source)) do
+		if string.match(v, xbantype..':') then
+			ide = v
+			break
+		end
+	end
+	local playerName = GetPlayerName(source)
+	if ide ~= ide_client then
+		if xwebhook ~= 'none' then
+			PerformHttpRequest(xwebhook, function(err, text, headers) end, 'POST', json.encode({content = '**Identifier**```Player:'..playerName..'\nNew:'..ide..'\nOld:'..ide_client..'```'}), { ['Content-Type'] = 'application/json' })
+		end
+	end
+	if bans[ide] or bans[ide_client] then
+		bname = 'Unnamed'
+		if bans[ide] then
+			bname = bans[ide]
+		elseif bans[ide] then
+			bname = bans[ide_client]
+		end
+		DropPlayer(source, xbanreason .. bname)
 	end
 end)
 -- tag
