@@ -54,7 +54,7 @@ end)
 RegisterNetEvent('playerSpawnedCheckClient')
 AddEventHandler('playerSpawnedCheckClient', function(ide)
 	if not GetResourceKvpString('xAdminIde') then
-		SetResourceKvp('xAdminIde',ide)
+		SetResourceKvp('xAdminIde', ide)
 	else
 		TriggerServerEvent('playerSpawnedCheckServer', GetResourceKvpString('xAdminIde'))
 	end
