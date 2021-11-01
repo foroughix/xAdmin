@@ -89,7 +89,7 @@ RegisterNetEvent('xtag:tag')
 AddEventHandler('xtag:tag', function(tag, serverId)
 	local ntag = tonumber(serverId)
 	local player = GetPlayerFromServerId(serverId)
-	if player ~= -1 then
+	if player ~= -1 or player == GetPlayerServerId(PlayerId()) then
 		local ped = GetPlayerPed(player)
 		if not peds[ntag] then
 			peds[ntag] = true
