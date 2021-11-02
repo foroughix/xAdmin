@@ -420,7 +420,7 @@ RegisterNetEvent('xadmin:clearchat')
 AddEventHandler('xadmin:clearchat', function()
 	TriggerEvent('chat:clear')
 end)
--- clearmap & dvall
+-- dvall & clearmap
 RegisterNetEvent('xadmin:dvall')
 AddEventHandler('xadmin:dvall', function()
 	for xveh in EnumerateVehicles() do
