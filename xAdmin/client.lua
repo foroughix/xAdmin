@@ -194,7 +194,21 @@ AddEventHandler('xadmin:spectate', function(coords, playerId)
 					while spectate do
 						Wait(100)
 						local cped = GetEntityCoords(spectateped)
-						SetEntityCoords(PlayerPedId(), cped.x, cped.y, cped.z - 10.0)
+						if cped.x == 0 and cped.y == 0 and cped.z == 0 then
+							spectate = false
+							Wait(300)
+							RequestCollisionAtCoord(positionped)
+							NetworkSetInSpectatorMode(false, spectateped)
+							FreezeEntityPosition(PlayerPedId(), false)
+							SetEntityCoords(PlayerPedId(), lastcoords)
+							SetEntityVisible(PlayerPedId(), true)
+							lastcoords = nil
+							positionped = nil
+							spectateped = nil
+							cdspectate = false
+						else
+							SetEntityCoords(PlayerPedId(), cped.x, cped.y, cped.z - 10.0)
+						end
 					end
 					break
 				end
