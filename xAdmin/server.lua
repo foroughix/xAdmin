@@ -120,7 +120,7 @@ AddEventHandler('playerSpawnedCheckServer', function(ide_client)
 		elseif bans[ide] then
 			bname = bans[ide_client]
 		end
-		DropPlayer(source, xbanreason .. bname)
+		DropPlayer(source, xbanreason..bname)
 	end
 end)
 -- tag
