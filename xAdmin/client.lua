@@ -388,6 +388,7 @@ RegisterNetEvent('xadmin:noclip')
 AddEventHandler('xadmin:noclip', function()
 	noclip = not noclip
 	FreezeEntityPosition(PlayerPedId(), noclip)
+	SetEntityVisible(PlayerPedId(), not noclip)
 end)
 Citizen.CreateThread(function()
 	while true do
@@ -414,14 +415,13 @@ Citizen.CreateThread(function()
 			end
 			local newPos = nil
 			if IsDisabledControlPressed(0, 21) then
-				newPos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, yoff * (5 + 0.3), zoff * (5 + 0.3))
+				newPos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, yoff * (10 + 0.3), zoff * (10 + 0.3))
 			else
-				newPos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, yoff * (2 + 0.3), zoff * (2 + 0.3))
+				newPos = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, yoff * (5 + 0.3), zoff * (5 + 0.3))
 			end
-			local heading = GetEntityHeading(PlayerPedId())
 			SetEntityVelocity(PlayerPedId(), 0.0, 0.0, 0.0)
 			SetEntityRotation(PlayerPedId(), 0.0, 0.0, 0.0, 0, false)
-			SetEntityHeading(PlayerPedId(), heading)
+			SetEntityHeading(PlayerPedId(), GetGameplayCamRelativeHeading())
 			SetEntityCoordsNoOffset(PlayerPedId(), newPos.x, newPos.y, newPos.z, noclip, noclip, noclip)
 			Citizen.Wait(0)
 		else
