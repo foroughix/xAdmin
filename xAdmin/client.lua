@@ -286,6 +286,7 @@ RegisterNetEvent('xadmin:fixveh')
 AddEventHandler('xadmin:fixveh', function()
 	if IsPedInAnyVehicle(PlayerPedId(), false) then
 		local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
+		SetVehicleOnGroundProperly(vehicle)
 		SetVehicleEngineHealth(vehicle, 1000)
 		SetVehicleEngineOn(vehicle, true, true)
 		SetVehicleFixed(vehicle)
