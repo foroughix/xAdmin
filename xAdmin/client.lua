@@ -108,7 +108,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(600000)
 	end
 end)
--- mute Thread
+-- mute
 local mute = false
 Citizen.CreateThread(function()
 	while true do
@@ -121,7 +121,6 @@ Citizen.CreateThread(function()
 		end
 	end
 end)
--- mute
 RegisterNetEvent('xadmin:mute')
 AddEventHandler('xadmin:mute', function()
 	mute = true
