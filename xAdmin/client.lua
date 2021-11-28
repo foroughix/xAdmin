@@ -125,7 +125,6 @@ RegisterNetEvent('xadmin:mute')
 AddEventHandler('xadmin:mute', function()
 	mute = true
 end)
--- unmute
 RegisterNetEvent('xadmin:unmute')
 AddEventHandler('xadmin:unmute', function()
 	mute = false
