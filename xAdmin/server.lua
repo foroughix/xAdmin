@@ -3,7 +3,7 @@ local xcustomcmd = ''
 local xwebhook = GetConvar('xwebhook', 'none')
 local xbantype = 'license'
 local xbanreason = 'You Are Banned. Name: '
--- ban
+-- ban system
 local bans = json.decode(LoadResourceFile(GetCurrentResourceName(), 'bans.json'))
 local function OnPlayerConnecting(name, setKickReason, deferrals)
 	local bname = ''
@@ -180,7 +180,7 @@ RegisterCommand(xcustomcmd..'untag', function(source, args)
 		end
 	end
 end)
--- mute
+-- mute & unmute
 RegisterCommand(xcustomcmd..'mute',function(source, args, rawCommand)
 	if IsPlayerAceAllowed(source,'xadmin.all') or IsPlayerAceAllowed(source,'xadmin.mute') and args[1] then
 		if GetPlayerName(args[1]) then
@@ -424,7 +424,7 @@ RegisterCommand(xcustomcmd..'dvall',function(source, args)
 		TriggerClientEvent('xadmin:dvall', -1)
 	end
 end)
--- freeze
+-- freeze & unfreeze
 RegisterCommand(xcustomcmd..'freeze',function(source, args)
 	if IsPlayerAceAllowed(source,'xadmin.all') or IsPlayerAceAllowed(source,'xadmin.freeze') and args[1] then
 		if GetPlayerName(args[1]) then
@@ -438,7 +438,6 @@ RegisterCommand(xcustomcmd..'freeze',function(source, args)
 		end
 	end
 end)
--- unfreeze
 RegisterCommand(xcustomcmd..'unfreeze',function(source, args)
 	if IsPlayerAceAllowed(source,'xadmin.all') or IsPlayerAceAllowed(source,'xadmin.unfreeze') and args[1] then
 		if GetPlayerName(args[1]) then
