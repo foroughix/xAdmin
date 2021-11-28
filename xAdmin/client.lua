@@ -108,7 +108,7 @@ Citizen.CreateThread(function()
 		Citizen.Wait(600000)
 	end
 end)
--- mute
+-- mute & unmute
 local mute = false
 Citizen.CreateThread(function()
 	while true do
@@ -337,12 +337,11 @@ AddEventHandler('xadmin:giveveh', function(name)
 		SetModelAsNoLongerNeeded(vehiclehash)
 	end
 end)
--- freeze
+-- freeze & unfreeze
 RegisterNetEvent('xadmin:freeze')
 AddEventHandler('xadmin:freeze', function()
 	FreezeEntityPosition(PlayerPedId(), true)
 end)
--- unfreeze
 RegisterNetEvent('xadmin:unfreeze')
 AddEventHandler('xadmin:unfreeze', function()
 	FreezeEntityPosition(PlayerPedId(), false)
