@@ -226,13 +226,13 @@ Citizen.CreateThread(function()
 		if players then
 			for _, i in ipairs(GetActivePlayers()) do
 				if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= PlayerPedId() then
-					aped = GetPlayerPed(i)
-					PPlayer = Citizen.InvokeNative(0xBFEFE3321A3F5015, aped, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
-					Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 0, true)
+					PPed = GetPlayerPed(i)
+					PPlayer = CreateFakeMpGamerTag(PPed, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
+					SetMpGamerTagVisibility(PPlayer, 0, true)
 					if NetworkIsPlayerTalking(i) then
-						Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, true)
+						SetMpGamerTagVisibility(PPlayer, 9, true)
 					else
-						Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, false)
+						SetMpGamerTagVisibility(PPlayer, 9, false)
 					end
 				end
 			end
@@ -240,10 +240,10 @@ Citizen.CreateThread(function()
 		else
 			for _, i in ipairs(GetActivePlayers()) do
 				if NetworkIsPlayerActive(i) and GetPlayerPed(i) ~= PlayerPedId() then
-					aped = GetPlayerPed(i)
-					PPlayer = Citizen.InvokeNative(0xBFEFE3321A3F5015, aped, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
-					Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 0, false)
-					Citizen.InvokeNative(0x63BB75ABEDC1F6A0, PPlayer, 9, false)
+					PPed = GetPlayerPed(i)
+					PPlayer = CreateFakeMpGamerTag(PPed, '[' .. GetPlayerServerId(i) .. '] ' .. GetPlayerName(i), false, false, '', false)
+					SetMpGamerTagVisibility(PPlayer, 0, false)
+					SetMpGamerTagVisibility(PPlayer, 9, false)
 				end
 			end
 			Citizen.Wait(1000)
