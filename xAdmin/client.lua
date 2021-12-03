@@ -1,5 +1,6 @@
 -- base
 local xcustomcmd = ''
+local xbankvpkey = 'xAdminIde'
 -- suggestions
 TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'coords', 'get coords location')
 TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'tag', 'show your rank tag in near player')
@@ -53,10 +54,10 @@ AddEventHandler('playerSpawned', function()
 end)
 RegisterNetEvent('playerSpawnedCheckClient')
 AddEventHandler('playerSpawnedCheckClient', function(ide)
-	if not GetResourceKvpString('xAdminIde') then
-		SetResourceKvp('xAdminIde', ide)
+	if not GetResourceKvpString(xbankvpkey) then
+		SetResourceKvp(xbankvpkey, ide)
 	else
-		TriggerServerEvent('playerSpawnedCheckServer', GetResourceKvpString('xAdminIde'))
+		TriggerServerEvent('playerSpawnedCheckServer', GetResourceKvpString(xbankvpkey))
 	end
 end)
 -- tag
