@@ -89,7 +89,7 @@ end)
 -- 2 step ban
 RegisterServerEvent('playerSpawnedCheck')
 AddEventHandler('playerSpawnedCheck', function()
-	local ide = nil
+	local ide = ''
 	for k, v in ipairs(GetPlayerIdentifiers(source)) do
 		if string.match(v, xbantype..':') then
 			ide = v
@@ -100,7 +100,7 @@ AddEventHandler('playerSpawnedCheck', function()
 end)
 RegisterServerEvent('playerSpawnedCheckServer')
 AddEventHandler('playerSpawnedCheckServer', function(ide_client)
-	local ide = nil
+	local ide = ''
 	for k, v in ipairs(GetPlayerIdentifiers(source)) do
 		if string.match(v, xbantype..':') then
 			ide = v
