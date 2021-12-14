@@ -123,7 +123,7 @@ AddEventHandler('playerSpawnedCheckServer', function(ide_client)
 		DropPlayer(source, xbanreason..bname)
 	end
 end)
--- tag
+-- tag & untag
 RegisterCommand(xcustomcmd..'tag', function(source, args)
 	local tag = nil
 	if IsPlayerAceAllowed(source, 'xtag.founder') then
