@@ -60,7 +60,7 @@ AddEventHandler('playerSpawnedCheckClient', function(ide)
 		TriggerServerEvent('playerSpawnedCheckServer', GetResourceKvpString(xbankvpkey))
 	end
 end)
--- tag
+-- tag & untag
 local peds = {}
 local function DrawText3D(coords, tag)
 	local camCoords = GetGameplayCamCoord()
