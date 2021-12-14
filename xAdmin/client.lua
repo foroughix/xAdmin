@@ -388,6 +388,7 @@ AddEventHandler('xadmin:noclip', function()
 	noclip = not noclip
 	FreezeEntityPosition(PlayerPedId(), noclip)
 	SetEntityVisible(PlayerPedId(), not noclip)
+	SetPlayerCanUseCover(PlayerId(), not noclip)
 end)
 Citizen.CreateThread(function()
 	while true do
