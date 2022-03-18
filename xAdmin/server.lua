@@ -86,43 +86,6 @@ RegisterCommand(xcustomcmd..'addban',function(source, args, rawCommand)
 		end
 	end
 end)
--- 2 step ban
-RegisterServerEvent('playerSpawnedCheck')
-AddEventHandler('playerSpawnedCheck', function()
-	local ide = ''
-	for k, v in ipairs(GetPlayerIdentifiers(source)) do
-		if string.match(v, xbantype..':') then
-			ide = v
-			break
-		end
-	end
-	TriggerClientEvent('playerSpawnedCheckClient', source, ide)
-end)
-RegisterServerEvent('playerSpawnedCheckServer')
-AddEventHandler('playerSpawnedCheckServer', function(ide_client)
-	local ide = ''
-	for k, v in ipairs(GetPlayerIdentifiers(source)) do
-		if string.match(v, xbantype..':') then
-			ide = v
-			break
-		end
-	end
-	local playerName = GetPlayerName(source)
-	if ide ~= ide_client then
-		if xwebhook ~= 'none' then
-			PerformHttpRequest(xwebhook, function(err, text, headers) end, 'POST', json.encode({content = '**Identifier**```Player:'..playerName..'\nNew:'..ide..'\nOld:'..ide_client..'```'}), { ['Content-Type'] = 'application/json' })
-		end
-	end
-	if bans[ide] or bans[ide_client] then
-		bname = 'Unnamed'
-		if bans[ide] then
-			bname = bans[ide]
-		elseif bans[ide] then
-			bname = bans[ide_client]
-		end
-		DropPlayer(source, xbanreason..bname)
-	end
-end)
 -- tag & untag
 RegisterCommand(xcustomcmd..'tag', function(source, args)
 	local tag = nil
