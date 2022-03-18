@@ -1,6 +1,5 @@
 -- base
 local xcustomcmd = ''
-local xbankvpkey = 'xAdminIde'
 -- suggestions
 TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'coords', 'get coords location')
 TriggerEvent('chat:addSuggestion', '/'..xcustomcmd..'tag', 'show your rank tag in near player')
@@ -48,18 +47,6 @@ function ShowNotification(text)
     AddTextComponentSubstringPlayerName(text)
     DrawNotification(false, false)
 end
--- 2 step ban
-AddEventHandler('playerSpawned', function()
-	TriggerServerEvent('playerSpawnedCheck')
-end)
-RegisterNetEvent('playerSpawnedCheckClient')
-AddEventHandler('playerSpawnedCheckClient', function(ide)
-	if not GetResourceKvpString(xbankvpkey) then
-		SetResourceKvp(xbankvpkey, ide)
-	else
-		TriggerServerEvent('playerSpawnedCheckServer', GetResourceKvpString(xbankvpkey))
-	end
-end)
 -- tag & untag
 local peds = {}
 local function DrawText3D(coords, tag)
