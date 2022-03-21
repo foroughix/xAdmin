@@ -16,7 +16,7 @@ add_principal identifier.fivem:1 group.admin
 1. Edit server.cfg and add below text/code and save it
 ```
 set xwebhook "your discord webhook"
-setr xswebhook "your screenshot discord webhook"
+set xswebhook "your screenshot discord webhook"
 ```
 2. Restart server and enjoy
 # Ranks
