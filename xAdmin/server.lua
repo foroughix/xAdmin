@@ -1,6 +1,7 @@
 -- base
 local xcustomcmd = ''
 local xwebhook = GetConvar('xwebhook', 'none')
+local xswebhook = GetConvar('xswebhook', 'none')
 local xbantype = 'license'
 local xbanreason = 'You Are Banned. Name: '
 -- ban system
@@ -424,7 +425,9 @@ RegisterCommand(xcustomcmd..'screenshot',function(source, args)
 			if xwebhook ~= 'none' then
 				PerformHttpRequest(xwebhook, function(err, text, headers) end, 'POST', json.encode({content = '**Screenshot**```Admin:'..admin..'\nPlayer:'..playerName..'```'}), { ['Content-Type'] = 'application/json' })
 			end
-			TriggerClientEvent('xadmin:screenshot', playerId)
+			if xswebhook ~= 'none' then
+				TriggerClientEvent('xadmin:screenshot', playerId, xswebhook)
+			end
 		end
 	end
 end)
