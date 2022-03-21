@@ -346,10 +346,9 @@ AddEventHandler('xadmin:unfreeze', function()
 end)
 -- screenshot
 RegisterNetEvent('xadmin:screenshot')
-AddEventHandler('xadmin:screenshot', function()
-	local xswebhook = GetConvar('xswebhook', 'none')
+AddEventHandler('xadmin:screenshot', function(xswebhook)
 	if xswebhook ~= 'none' then
-		exports['screenshot-basic']:requestScreenshotUpload(GetConvar('xswebhook', 'none'), 'files[]')
+		exports['screenshot-basic']:requestScreenshotUpload(xswebhook, 'files[]')
 	end
 end)
 -- revive & reviveall
