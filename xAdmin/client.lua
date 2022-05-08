@@ -442,22 +442,22 @@ AddEventHandler('xadmin:dvall', function()
 end)
 RegisterNetEvent('xadmin:clearmap')
 AddEventHandler('xadmin:clearmap', function()
-	for xveh in EnumerateVehicles() do
+	for _, xveh in pairs(GetGamePool('CVehicle')) do
 		SetEntityAsMissionEntity(xveh, false, false)
 		DeleteEntity(xveh)
 	end
-	for xobj in EnumeratePickups() do
-		RemovePickup(xobj)
-		SetEntityAsMissionEntity(xobj, false, false)
-		DeleteEntity(xobj)
+	for _, xpobj in pairs(GetGamePool('CPickup')) do
+		RemovePickup(xpobj)
+		SetEntityAsMissionEntity(xpobj, false, false)
+		DeleteEntity(xpobj)
 	end
-	for xped in EnumeratePeds() do
+	for _, xped in pairs(GetGamePool('CPed')) do
 		if not IsPedAPlayer(xped) then	
 			SetEntityAsMissionEntity(xped, false, false)
 			DeleteEntity(xped)
 		end
 	end
-	for xobj in EnumerateObjects() do
+	for _, xobj in pairs(GetGamePool('CObject')) do
 		if NetworkGetEntityOwner(xobj) ~= -1 then
 			DetachEntity(xobj, true, true)
 			SetEntityAsMissionEntity(xobj, false, false)
@@ -471,42 +471,3 @@ AddEventHandler('xadmin:clearmap', function()
 	ClearAreaOfProjectiles(x, y, z, 300.0, 1)
 	ClearAreaOfVehicles(x, y, z, 300.0, false, false, false, false, false)
 end)
-local entityEnumerator = {
-	__gc = function(enum)
-	    if enum.destructor and enum.handle then
-		    enum.destructor(enum.handle)
-	    end
-	    enum.destructor = nil
-	    enum.handle = nil
-	end
-}
-local function EnumerateEntities(initFunc, moveFunc, disposeFunc)
-	return coroutine.wrap(function()
-	    local iter, id = initFunc()
-	    if not id or id == 0 then
-	        disposeFunc(iter)
-		    return
-	    end  
-	    local enum = {handle = iter, destructor = disposeFunc}
-	    setmetatable(enum, entityEnumerator) 
-	    local next = true
-	    repeat
-		    coroutine.yield(id)
-		    next, id = moveFunc(iter)
-	    until not next  
-	    enum.destructor, enum.handle = nil, nil
-	    disposeFunc(iter)
-	end)
-end
-function EnumerateVehicles()
-	return EnumerateEntities(FindFirstVehicle, FindNextVehicle, EndFindVehicle)
-end
-function EnumerateObjects()
-	return EnumerateEntities(FindFirstObject, FindNextObject, EndFindObject)
-end
-function EnumeratePickups()
-	return EnumerateEntities(FindFirstPickup, FindNextPickup, EndFindPickup)
-end
-function EnumeratePeds()
-	return EnumerateEntities(FindFirstPed, FindNextPed, EndFindPed)
-end
