@@ -20,7 +20,7 @@ local function OnPlayerConnecting(name, setKickReason, deferrals)
 		end
 	end
 	if banned then
-		reason = xbanreason..bname
+		local reason = xbanreason..bname
 		CancelEvent()
 		setKickReason(reason)
 	end
