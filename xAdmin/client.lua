@@ -49,7 +49,7 @@ function ShowNotification(text)
 end
 -- tag & untag
 local peds = {}
-local function DrawText3D(coords, tag)
+function DrawText3D(coords, tag)
 	local camCoords = GetGameplayCamCoord()
 	local dist = #(coords - camCoords)   
 	local scale = 200 / (GetGameplayCamFov() * dist)
@@ -65,7 +65,7 @@ local function DrawText3D(coords, tag)
 	EndTextCommandDisplayText(0.0, 0.0)
 	ClearDrawOrigin()
 end
-local function Display(ped, tag, ntag)	
+function Display(ped, tag, ntag)	
 	local playerPed = PlayerPedId()
 	while peds[ntag] do
 		local x, y, z = table.unpack(GetEntityCoords(ped))
