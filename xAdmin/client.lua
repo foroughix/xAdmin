@@ -433,7 +433,7 @@ end)
 -- dvall & clearmap
 RegisterNetEvent('xadmin:dvall')
 AddEventHandler('xadmin:dvall', function()
-	for xveh in EnumerateVehicles() do
+	for _, xveh in pairs(GetGamePool('CVehicle')) do
 		if not IsPedAPlayer(GetPedInVehicleSeat(xveh, -1)) then 
 			SetEntityAsMissionEntity(xveh, false, false)
 			DeleteEntity(xveh)
